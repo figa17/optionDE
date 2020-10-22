@@ -21,7 +21,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(usersApiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.demo.test"))
+                .apis(RequestHandlerSelectors.basePackage("com.option.test"))
                 .paths(PathSelectors.any())
                 .build();
     }
