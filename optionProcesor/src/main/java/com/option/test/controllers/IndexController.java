@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class IndexController {
 
 
-    @GetMapping()
+    @GetMapping("/index")
     public ResponseEntity<String> index(){
         String response = "Data engineer test";
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
 }
