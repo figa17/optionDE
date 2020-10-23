@@ -7,11 +7,13 @@
         <module>optionFunction</module>
         <module>optionProcesor</module>
     </modules>
-    <!--    <parent>-->
-    <!--        <groupId>org.springframework.boot</groupId>-->
-    <!--        <artifactId>spring-boot-starter-parent</artifactId>-->
-    <!--        <version>2.3.4.RELEASE</version>-->
-    <!--    </parent>-->
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.4.RELEASE</version>
+    </parent>
+
     <groupId>com.option</groupId>
     <artifactId>test</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -34,22 +36,18 @@
         <dependency>
             <groupId>org.springframework.integration</groupId>
             <artifactId>spring-integration-core</artifactId>
-            <version>2.3.4.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-gcp-starter</artifactId>
-            <version>2.3.4.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-gcp-starter-pubsub</artifactId>
-            <version>2.3.4.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-gcp-starter-storage</artifactId>
-            <version>2.3.4.RELEASE</version>
         </dependency>
 
         <!-- UTIL -->
