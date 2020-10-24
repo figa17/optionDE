@@ -65,11 +65,15 @@ public class BigQueryProcess implements DataProcessor {
             TableInfo tableInfo = TableInfo.newBuilder(tableId, externalTable).build();
 
             bigquery.create(tableInfo);
-            logger.info("Table created successfully");
+            logger.info("Table: " + TABLE_NAME + " created successfully");
         } catch (BigQueryException e) {
             logger.error("Table was not created. Error: " + e.toString());
         }
+
     }
 
+    private void deleteTable(){
+
+    }
 
 }
