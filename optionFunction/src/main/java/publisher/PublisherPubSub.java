@@ -23,7 +23,7 @@ public class PublisherPubSub {
     private static final String TOPIC_ID = "option-de";
     private static final Logger logger = Logger.getLogger(PublisherPubSub.class.getName());
 
-    public void publishWithErrorHandlerExample(final String pathData) throws InterruptedException {
+    public void publishWithErrorHandler(final String pathData) throws InterruptedException {
         TopicName topicName = TopicName.of(PROJECT_ID, TOPIC_ID);
         Publisher publisher = null;
         try {

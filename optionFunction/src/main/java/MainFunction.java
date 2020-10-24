@@ -8,8 +8,6 @@ import pojo.GcsEvent;
 import publisher.PublisherPubSub;
 import java.util.logging.Logger;
 
-import java.io.IOException;
-
 public class MainFunction implements BackgroundFunction<GcsEvent> {
 
     private static final Logger logger = Logger.getLogger(MainFunction.class.getName());
@@ -29,7 +27,7 @@ public class MainFunction implements BackgroundFunction<GcsEvent> {
 
         String path = event.getBucket() + "/" + event.getName();
         logger.info("Path to send: " + path);
-        pubSub.publishWithErrorHandlerExample(path);
+        pubSub.publishWithErrorHandler(path);
 
     }
 }
