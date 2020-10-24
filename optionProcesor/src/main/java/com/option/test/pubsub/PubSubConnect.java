@@ -52,7 +52,7 @@ public class PubSubConnect {
     @ServiceActivator(inputChannel = "inputChannel")
     public MessageHandler getPath() {
         return message -> {
-            LOGGER.info("Message arrived! Payload: " + new String((byte[]) message.getPayload()));
+            LOGGER.info("Message Payload: " + new String((byte[]) message.getPayload()));
 
             BasicAcknowledgeablePubsubMessage originalMessage = message.getHeaders()
                     .get(GcpPubSubHeaders.ORIGINAL_MESSAGE, BasicAcknowledgeablePubsubMessage.class);
