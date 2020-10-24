@@ -18,6 +18,11 @@
             <groupId>com.google.cloud</groupId>
             <artifactId>google-cloud-bigquery</artifactId>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.google.cloud</groupId>-->
+<!--            <artifactId>google-cloud-logging-logback</artifactId>-->
+<!--            <version>0.118.2-alpha</version>-->
+<!--        </dependency>-->
     </dependencies>
 
 </project>

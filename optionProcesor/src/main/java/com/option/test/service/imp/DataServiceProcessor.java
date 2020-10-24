@@ -21,6 +21,6 @@ public class DataServiceProcessor implements DataService {
 
     @Override
     public void processData(String pathFile) {
-        this.dataProcessor.loadData("test");
+        this.dataProcessor.loadData(pathFile);
     }
 }

@@ -8,4 +8,6 @@ public interface DataProcessor {
     void loadData(String inputData);
 
     boolean processData();
+
+    boolean saveResult();
 }

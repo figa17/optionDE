@@ -1,7 +1,7 @@
 package com.option.test.config;
 
 import com.google.api.services.bigquery.Bigquery;
-import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Configuration;
 public class ConfigService {
 
     @Bean
-    public Bigquery getBigQueryProcess() {
-        return (Bigquery) BigQueryOptions.getDefaultInstance().getService();
+    public BigQuery getBigQueryProcess() {
+        return BigQueryOptions.getDefaultInstance().getService();
     }
 
 }

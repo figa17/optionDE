@@ -1,5 +1,6 @@
 package com.option.test.pubsub;
 
+import com.option.test.service.DataService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -50,13 +51,15 @@ public class PubSubConnect {
 
     @Bean
     @ServiceActivator(inputChannel = "inputChannel")
-    public MessageHandler getPath() {
+    public MessageHandler getPath(DataService dataService) {
         return message -> {
-            LOGGER.info("Message Payload: " + new String((byte[]) message.getPayload()));
+            String payload = new String((byte[]) message.getPayload());
+            LOGGER.info("Message Payload: " + payload);
 
             BasicAcknowledgeablePubsubMessage originalMessage = message.getHeaders()
                     .get(GcpPubSubHeaders.ORIGINAL_MESSAGE, BasicAcknowledgeablePubsubMessage.class);
             originalMessage.ack();
+            dataService.processData(payload);
         };
     }
 
