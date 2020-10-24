@@ -9,25 +9,23 @@ import com.google.common.util.concurrent.MoreExecutors;
 import com.google.protobuf.ByteString;
 import com.google.pubsub.v1.PubsubMessage;
 import com.google.pubsub.v1.TopicName;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 /**
  * Created by Felipe González Alfaro on 22-10-20.
  */
 public class PublisherPubSub {
 
-    private static final String PROJECT_ID = "optio-de";
-    private static final String TOPIC_ID = "inputPathData";
-    private static final Logger logger = LoggerFactory.getLogger(PublisherPubSub.class);
+    private static final String PROJECT_ID = "optionde";
+    private static final String TOPIC_ID = "option-de";
+    private static final Logger logger = Logger.getLogger(PublisherPubSub.class.getName());
 
-    public void publishWithErrorHandlerExample(String pathData) throws IOException, InterruptedException {
+    public void publishWithErrorHandlerExample(final String pathData) throws InterruptedException {
         TopicName topicName = TopicName.of(PROJECT_ID, TOPIC_ID);
         Publisher publisher = null;
-
         try {
             // Create a publisher instance with default settings bound to the topic
             publisher = Publisher.newBuilder(topicName).build();
@@ -62,6 +60,8 @@ public class PublisherPubSub {
                         }
                     },
                     MoreExecutors.directExecutor());
+        } catch (Exception e) {
+            logger.info("ERROR: " + e.getMessage());
         } finally {
             if (publisher != null) {
                 // When finished with the publisher, shutdown to free up resources.

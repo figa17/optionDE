@@ -11,8 +11,10 @@
     `sudo docker run optionde`
 
 ### Publish gcp function
+    
+From inside ***optionFunction*** module:
 
-    gcloud functions deploy java-gcs-function \
+    gcloud functions deploy option-function \
     --entry-point MainFunction \
     --runtime java11 \
     --memory 512MB \

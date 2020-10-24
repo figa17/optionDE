@@ -4,19 +4,18 @@
 
 import com.google.cloud.functions.BackgroundFunction;
 import com.google.cloud.functions.Context;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import pojo.GcsEvent;
 import publisher.PublisherPubSub;
+import java.util.logging.Logger;
 
 import java.io.IOException;
 
 public class MainFunction implements BackgroundFunction<GcsEvent> {
 
-    private static final Logger logger = LoggerFactory.getLogger(MainFunction.class);
+    private static final Logger logger = Logger.getLogger(MainFunction.class.getName());
 
     @Override
-    public void accept(GcsEvent event, Context context) throws IOException, InterruptedException {
+    public void accept(GcsEvent event, Context context) throws InterruptedException {
 
         PublisherPubSub pubSub = new PublisherPubSub();
 
@@ -29,6 +28,7 @@ public class MainFunction implements BackgroundFunction<GcsEvent> {
         logger.info("Updated: " + event.getUpdated());
 
         String path = event.getBucket() + "/" + event.getName();
+        logger.info("Path to send: " + path);
         pubSub.publishWithErrorHandlerExample(path);
 
     }
