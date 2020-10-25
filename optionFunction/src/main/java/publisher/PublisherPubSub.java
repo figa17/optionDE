@@ -3,14 +3,19 @@ package publisher;
 import com.google.api.core.ApiFuture;
 import com.google.api.core.ApiFutureCallback;
 import com.google.api.core.ApiFutures;
+import com.google.api.gax.core.CredentialsProvider;
+import com.google.api.gax.core.FixedCredentialsProvider;
 import com.google.api.gax.rpc.ApiException;
+import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.pubsub.v1.Publisher;
+import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.MoreExecutors;
 import com.google.protobuf.ByteString;
 import com.google.pubsub.v1.PubsubMessage;
 import com.google.pubsub.v1.TopicName;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
@@ -27,8 +32,15 @@ public class PublisherPubSub {
         TopicName topicName = TopicName.of(PROJECT_ID, TOPIC_ID);
         Publisher publisher = null;
         try {
+
+            InputStream in = this.getClass().getClassLoader().getResourceAsStream("optionde-2a3ca1e38910.json");
+            GoogleCredentials credentials = GoogleCredentials.fromStream(in)
+                    .createScoped(Lists.newArrayList("https://www.googleapis.com/auth/pubsub"));
+
+            CredentialsProvider credentialsProvider = FixedCredentialsProvider.create(credentials);
+
             // Create a publisher instance with default settings bound to the topic
-            publisher = Publisher.newBuilder(topicName).build();
+            publisher = Publisher.newBuilder(topicName).setCredentialsProvider(credentialsProvider).build();
 
             ByteString data = ByteString.copyFromUtf8(pathData);
             PubsubMessage pubsubMessage = PubsubMessage.newBuilder().setData(data).build();
