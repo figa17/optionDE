@@ -5,7 +5,7 @@ package com.option.test.processor;
  */
 public interface DataProcessor {
 
-    void loadData(String inputData);
+    void loadData(String inputData) throws IllegalAccessException;
 
     boolean processData();
 

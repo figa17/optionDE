@@ -17,6 +17,7 @@ public class BigQueryProcess implements DataProcessor {
     private final static String DATASET = "optionde";
     private final static String TABLE_NAME = "inputData";
 
+    private final TableId tableId = TableId.of(DATASET, TABLE_NAME);
     private static final Logger logger = LoggerFactory.getLogger(BigQueryProcess.class);
 
     @Autowired
@@ -25,7 +26,11 @@ public class BigQueryProcess implements DataProcessor {
     }
 
     @Override
-    public void loadData(String inputData) {
+    public void loadData(String inputData) throws IllegalArgumentException{
+        if (inputData == null) {
+            throw new IllegalArgumentException("Path data cant be null");
+        }
+
         Schema schema = this.createsSchemaTable();
         this.createTable(schema, inputData);
     }
@@ -60,7 +65,7 @@ public class BigQueryProcess implements DataProcessor {
             // Skip header row in the file.
             CsvOptions csvOptions = CsvOptions.newBuilder().setSkipLeadingRows(1).build();
 
-            TableId tableId = TableId.of(DATASET, TABLE_NAME);
+
             ExternalTableDefinition externalTable = ExternalTableDefinition.newBuilder(path, csvOptions).setSchema(schema).build();
             TableInfo tableInfo = TableInfo.newBuilder(tableId, externalTable).build();
 
@@ -72,8 +77,8 @@ public class BigQueryProcess implements DataProcessor {
 
     }
 
-    private void deleteTable(){
-
+    private void deleteTable() {
+        bigquery.delete(tableId);
     }
 
 }

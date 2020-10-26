@@ -25,6 +25,8 @@ import org.springframework.messaging.MessageHandler;
 @PropertySource("classpath:application.properties")
 public class PubSubConnect {
 
+    private static final String STORAGE_SCHEMA = "gs://";
+
     private static final Log LOGGER = LogFactory.getLog(PubSubConnect.class);
 
     @Value("${app.subscriptionname}")
@@ -59,7 +61,7 @@ public class PubSubConnect {
             BasicAcknowledgeablePubsubMessage originalMessage = message.getHeaders()
                     .get(GcpPubSubHeaders.ORIGINAL_MESSAGE, BasicAcknowledgeablePubsubMessage.class);
             originalMessage.ack();
-            dataService.processData(payload);
+            dataService.processData(STORAGE_SCHEMA + payload);
         };
     }
 
